@@ -37,6 +37,7 @@ if(isset($_GET['delete_id'])){
             <th scope="col">Назва</th>
             <th scope="col">Дата</th>
             <th scope="col">Опис</th>
+            <th scope="col" colspan="2">Дії</th>
         </tr>
         </thead>
         <tbody>
@@ -60,8 +61,8 @@ if(isset($_GET['delete_id'])){
             <td>$name</td>
             <td>$datepublish</td>
             <td>$description
-            <td><a href='/?delete_id=$id'>Видалити</a></td>
-            <td><a href='create.php?id=$id'>Редагувати</a></td>
+            <td><a href='create.php?id=$id' class='btn btn-primary'>Редагувати</a></td>
+            <td><a href='/?delete_id=$id' class='btn btn-danger'>Видалити</a></td>
         </tr>
             ";
         }
