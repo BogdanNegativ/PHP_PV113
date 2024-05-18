@@ -29,6 +29,9 @@
                     </div>
                     <div class="card-body">
                         <p class="card-text">{{ $post->body }}</p>
+                        @if ($post->image)
+                            <img width="200" src="{{ asset('storage/images/' . $post->image) }}" class="img-fluid" alt="Post Image">
+                        @endif
                     </div>
                     <div class="card-footer">
                         <div class="row">

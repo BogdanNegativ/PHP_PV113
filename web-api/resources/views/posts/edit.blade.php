@@ -19,11 +19,12 @@
         </div>
     </div>
 </nav>
+
 <div class="container h-100 mt-5">
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-10 col-md-8 col-lg-6">
             <h3>Update Post</h3>
-            <form action="{{ route('posts.update', $post->id) }}" method="post">
+            <form action="{{ route('posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -35,10 +36,33 @@
                     <label for="body">Body</label>
                     <textarea class="form-control" id="body" name="body" rows="3" required>{{ $post->body }}</textarea>
                 </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image" onchange="previewImage(event)">
+                </div>
+                <div class="form-group">
+                    <label>Current Image:</label><br>
+                    @if($post->image)
+                        <img src="{{ asset('storage/images/' . $post->image) }}" alt="Current Image" style="max-width: 200px;">
+                    @else
+                        <span>No image available</span>
+                    @endif
+                </div>
                 <button type="submit" class="btn mt-3 btn-primary">Update Post</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage(event) {
+        var preview = document.querySelector('img');
+        preview.src = URL.createObjectURL(event.target.files[0]);
+        preview.onload = function () {
+            URL.revokeObjectURL(preview.src);
+        }
+    }
+</script>
+
 </body>
 </html>

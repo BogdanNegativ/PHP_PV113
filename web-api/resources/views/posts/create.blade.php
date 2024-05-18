@@ -19,11 +19,12 @@
         </div>
     </div>
 </nav>
+
 <div class="container h-100 mt-5">
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-10 col-md-8 col-lg-6">
             <h3>Add a Post</h3>
-            <form action="{{ route('posts.store') }}" method="post">
+            <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -33,11 +34,31 @@
                     <label for="body">Body</label>
                     <textarea class="form-control" id="body" name="body" rows="3" required></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+                </div>
+                <div class="form-group">
+                    <img width="200" id="preview" src="#" alt="Preview" style="display: none; max-width: 100%; height: auto;">
+                </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Create Post</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var preview = document.getElementById('preview');
+            preview.src = reader.result;
+            preview.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
 </body>
 </html>
