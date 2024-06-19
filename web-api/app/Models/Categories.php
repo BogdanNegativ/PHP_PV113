@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static create(array $inputs)
- * @method static find(int $id)
+ * @method static findOrFail($id)
  */
 class Categories extends Model
 {
@@ -16,5 +16,6 @@ class Categories extends Model
 
     protected $fillable = [
         'name',
+        'image'
     ];
 }

@@ -37,9 +37,13 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "name"
+                                    "name",
+                                    "image"
                                 ],
                                 "properties": {
+                                    "image": {
+                                        "type": "file"
+                                    },
                                     "name": {
                                         "type": "string"
                                     }
@@ -83,47 +87,6 @@
                     }
                 }
             },
-            "put": {
-                "tags": [
-                    "Category"
-                ],
-                "summary": "Update category by ID",
-                "operationId": "ee7c82ac9d83255337f5f8504f2de002",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of the category",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Category updated"
-                    },
-                    "404": {
-                        "description": "Category not found"
-                    }
-                }
-            },
             "delete": {
                 "tags": [
                     "Category"
@@ -147,6 +110,51 @@
                     },
                     "404": {
                         "description": "Category not found"
+                    }
+                }
+            }
+        },
+        "/api/categories/edit/{id}": {
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "operationId": "c89ca3d973041c422881f82b1766d637",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the category",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "image": {
+                                        "type": "file"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Add Category."
                     }
                 }
             }
